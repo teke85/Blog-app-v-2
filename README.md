@@ -64,7 +64,7 @@
 - **Add comments**
 - **Add like posts**
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to the top</a>)</p>
 
 <!-- LIVE DEMO -->
 
