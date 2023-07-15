@@ -112,7 +112,7 @@ To run tests, run the following command:
   rspec spec
 ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- AUTHORS -->
 
