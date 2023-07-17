@@ -11,10 +11,9 @@ second_user = User.create(name: 'Lilly', photo: 'https://unsplash.com/photos/F_-
 
 
 first_post = Post.create(author: first_user, title: 'Hello', text: 'This is my first post')
-second_post = Post.create(author: second_user, title: 'Hello', text: 'This is my second post')
-third_post = Post.create(author: first_user, title: 'Hello', text: 'This is my third post')
-fourth_post = Post.create(author: second_user, title: 'Hello', text: 'This is my fourth post')
-
+second_post = Post.create(author: first_user, title: 'Cheers', text: 'This is my second post')
+third_post = Post.create(author: first_user, title: 'Time to fly', text: 'This is my third post')
+fourth_post = Post.create(author: first_user, title: 'Amazing grace', text: 'This is my fourth post')
 
 Comment.create(post: first_post, author: second_user, text: 'Hi Tom!' )
 Comment.create(post: first_post, author: second_user, text: 'Hi Teke!' )
@@ -22,5 +21,4 @@ Comment.create(post: first_post, author: second_user, text: 'Hi John!' )
 Comment.create(post: first_post, author: second_user, text: 'Hi Charles!' )
 Comment.create(post: first_post, author: second_user, text: 'Hi Ben!' )
 Comment.create(post: first_post, author: second_user, text: 'Hi Chris!' )
-Comment.create(post: first_post, author: second_user, text: 'Hi Mary!' )
-Comment.create(post: first_post, author: second_user, text: 'Hi Bruce!' )
+
