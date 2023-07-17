@@ -122,7 +122,6 @@ To run tests, run the following command:
 - Twitter: [@muttau](https://twitter.com/muttau)
 - LinkedIn: [isiteketo mutau](https://www.linkedin.com/in/isiteketo-mutau-736894241/)
 
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
@@ -149,7 +148,7 @@ Feel free to check the [issues page](https://github.com/teke85/blog-app/issues).
 
 ## ⭐️ Show your support <a name="support"></a>
 
-If you like this project please give it a star!
+If you like this project please give it a star!!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
