@@ -122,7 +122,6 @@ To run tests, run the following command:
 - Twitter: [@muttau](https://twitter.com/muttau)
 - LinkedIn: [isiteketo mutau](https://www.linkedin.com/in/isiteketo-mutau-736894241/)
 
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
@@ -157,7 +156,7 @@ If you like this project please give it a star!
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-I would like to thank Microverse.
+I would like to thank Microverse & all my fellow microverse friends.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
