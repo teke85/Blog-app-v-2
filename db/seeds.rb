@@ -21,4 +21,3 @@ Comment.create(post: first_post, author: second_user, text: 'Hi John!' )
 Comment.create(post: first_post, author: second_user, text: 'Hi Charles!' )
 Comment.create(post: first_post, author: second_user, text: 'Hi Ben!' )
 Comment.create(post: first_post, author: second_user, text: 'Hi Chris!' )
-
