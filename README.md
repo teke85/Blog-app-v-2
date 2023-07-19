@@ -10,7 +10,6 @@
   - [Install](#install)
   - [Usage](#usage)
   - [Run tests](#run-tests)
-  - [Deployment](#triangular_flag_on_post-deployment)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
@@ -65,12 +64,6 @@
 - **Add like posts**
 
 <p align="right">(<a href="#readme-top">back to the top</a>)</p>
-
-<!-- LIVE DEMO -->
-
-## 🚀 Live Demo Not Available
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 
