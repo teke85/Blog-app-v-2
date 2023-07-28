@@ -545,3 +545,139 @@ Processing by PagesController#home as HTML
 Completed 200 OK in 134ms (Views: 76.0ms | ActiveRecord: 0.0ms | Allocations: 5090)
 
 
+Started GET "/user" for 127.0.0.1 at 2023-07-28 12:47:25 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/user"):
+  
+Started GET "/users" for 127.0.0.1 at 2023-07-28 12:47:32 +0200
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb
+  Rendered users/index.html.erb (Duration: 1.1ms | Allocations: 126)
+Completed 200 OK in 13ms (Views: 8.9ms | Allocations: 896)
+
+
+Started GET "/posts" for 127.0.0.1 at 2023-07-28 12:47:42 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/posts"):
+  
+Started GET "/post" for 127.0.0.1 at 2023-07-28 12:47:49 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/post"):
+  
+Started GET "/users" for 127.0.0.1 at 2023-07-28 12:48:14 +0200
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb
+  Rendered users/index.html.erb (Duration: 0.1ms | Allocations: 7)
+Completed 200 OK in 5ms (Views: 2.0ms | Allocations: 343)
+
+
+Started GET "/users/id" for 127.0.0.1 at 2023-07-28 12:48:19 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"id"}
+  [1m[36mUser Load (52.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+Completed 404 Not Found in 732ms (ActiveRecord: 327.3ms | Allocations: 15701)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=id):
+  
+app/controllers/users_controller.rb:3:in `show'
+Started GET "/users/" for 127.0.0.1 at 2023-07-28 12:48:35 +0200
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb
+  Rendered users/index.html.erb (Duration: 0.1ms | Allocations: 7)
+Completed 200 OK in 5ms (Views: 1.4ms | ActiveRecord: 0.0ms | Allocations: 364)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2023-07-28 12:51:50 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (42.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering users/show.html.erb
+  Rendered users/show.html.erb (Duration: 1.3ms | Allocations: 124)
+Completed 200 OK in 364ms (Views: 3.1ms | ActiveRecord: 42.8ms | Allocations: 11870)
+
+
+Started GET "/users/2" for 127.0.0.1 at 2023-07-28 12:51:57 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering users/show.html.erb
+  Rendered users/show.html.erb (Duration: 0.1ms | Allocations: 7)
+Completed 200 OK in 9ms (Views: 1.8ms | ActiveRecord: 0.4ms | Allocations: 933)
+
+
+Started GET "/users/7" for 127.0.0.1 at 2023-07-28 12:52:04 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+Completed 404 Not Found in 7ms (ActiveRecord: 0.4ms | Allocations: 951)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=7):
+  
+app/controllers/users_controller.rb:3:in `show'
+Started GET "/users/3" for 127.0.0.1 at 2023-07-28 12:52:12 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+Completed 404 Not Found in 6ms (ActiveRecord: 0.4ms | Allocations: 943)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=3):
+  
+app/controllers/users_controller.rb:3:in `show'
+Started GET "/users/2" for 127.0.0.1 at 2023-07-28 12:52:18 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering users/show.html.erb
+  Rendered users/show.html.erb (Duration: 0.1ms | Allocations: 7)
+Completed 200 OK in 10ms (Views: 1.8ms | ActiveRecord: 0.9ms | Allocations: 865)
+
+
+Started GET "/" for 127.0.0.1 at 2023-07-28 12:52:31 +0200
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb
+  Rendered pages/home.html.erb (Duration: 0.1ms | Allocations: 17)
+Completed 200 OK in 7ms (Views: 2.8ms | ActiveRecord: 0.0ms | Allocations: 728)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2023-07-28 12:52:43 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering users/show.html.erb
+  Rendered users/show.html.erb (Duration: 0.0ms | Allocations: 7)
+Completed 200 OK in 9ms (Views: 1.7ms | ActiveRecord: 0.3ms | Allocations: 938)
+
+
+Started GET "/users/1/posts" for 127.0.0.1 at 2023-07-28 12:52:50 +0200
+Processing by PostsController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  Rendering posts/index.html.erb
+  Rendered posts/index.html.erb (Duration: 1.1ms | Allocations: 124)
+Completed 200 OK in 13ms (Views: 9.1ms | ActiveRecord: 0.0ms | Allocations: 894)
+
+
+Started GET "/users/1/posts/3" for 127.0.0.1 at 2023-07-28 12:53:01 +0200
+Processing by PostsController#show as HTML
+  Parameters: {"user_id"=>"1", "id"=>"3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:3:in `show'
+  [1m[36mPost Load (59.8ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:4:in `show'
+  Rendering posts/show.html.erb
+  Rendered posts/show.html.erb (Duration: 1.1ms | Allocations: 118)
+Completed 200 OK in 155ms (Views: 2.7ms | ActiveRecord: 64.1ms | Allocations: 8669)
+
+
