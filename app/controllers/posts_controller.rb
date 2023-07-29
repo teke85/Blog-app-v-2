@@ -2,7 +2,12 @@
 class PostsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
-    @post = @user.posts
+    @posts = @user.posts  # Initialize the @posts variable with the posts associated with the user
+  
+    # Add logging
+  Rails.logger.info("User: #{@user}")
+  Rails.logger.info("Posts: #{@posts}")
+  
   end
 
   def show
