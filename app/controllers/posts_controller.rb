@@ -1,11 +1,12 @@
+# controller for handling posts
 class PostsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
-    @posts = @user.posts # Assuming there is an association between User and Post models
+    @post = @user.posts
   end
 
   def show
     @user = User.find(params[:user_id])
-    @post = Post.find(params[:id])
+    @post = @user.posts.find(params[:id])
   end
 end

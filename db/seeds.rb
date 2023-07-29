@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# seeds file
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
@@ -11,13 +15,13 @@ second_user = User.create(name: 'Lilly', photo: 'https://unsplash.com/photos/F_-
 
 
 first_post = Post.create(author: first_user, title: 'Hello', text: 'This is my first post')
-second_post = Post.create(author: first_user, title: 'Cheers', text: 'This is my second post')
-third_post = Post.create(author: first_user, title: 'Time to fly', text: 'This is my third post')
-fourth_post = Post.create(author: first_user, title: 'Amazing grace', text: 'This is my fourth post')
+second_post = Post.create(author: second_user, title: 'Hello', text: 'This is my first post')
+third_post = Post.create(author: first_user, title: 'Hello', text: 'This is my first post')
+fourth_post = Post.create(author: second_user, title: 'Hello', text: 'This is my first post')
 
-Comment.create(post: first_post, author: second_user, text: 'Hi Tom!' )
-Comment.create(post: first_post, author: second_user, text: 'Hi Teke!' )
-Comment.create(post: first_post, author: second_user, text: 'Hi John!' )
-Comment.create(post: first_post, author: second_user, text: 'Hi Charles!' )
-Comment.create(post: first_post, author: second_user, text: 'Hi Ben!' )
-Comment.create(post: first_post, author: second_user, text: 'Hi Chris!' )
+Comment.create(post: first_post, author: second_user, text: 'Hi Tom!')
+Comment.create(post: first_post, author: first_user, text: 'Hi Lilly!')
+Comment.create(post: second_post, author: second_user, text: 'Hi Tom!')
+Comment.create(post: second_post, author: first_user, text: 'Hi Lilly!')
+Comment.create(post: third_post, author: second_user, text: 'Hi Tom!')
+Comment.create(post: third_post, author: first_user, text: 'Hi Lilly!')

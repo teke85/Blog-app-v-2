@@ -2,13 +2,20 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   let!(:user) { User.create(name: 'Eby', bio: 'Dancer', posts_counter: 0) }
+
   subject do
-    described_class.new(title: 'Post 1', text: 'This is my blog', author: user, comments_counter: 0, likes_counter: 0)
+    described_class.new(
+      title: 'Post 1',
+      text: 'This is my blog',
+      author: user,
+      comments_counter: 0,
+      likes_counter: 0
+    )
   end
 
   before { subject.save }
 
-  describe 'validations' do
+  describe 'Validations' do
     it 'is valid with valid attributes' do
       expect(subject).to be_valid
     end
@@ -44,7 +51,7 @@ RSpec.describe Post, type: :model do
     end
   end
 
-  describe 'associations' do
+  describe 'Associations' do
     it 'belongs to an author' do
       expect(subject.author).to eq(user)
     end

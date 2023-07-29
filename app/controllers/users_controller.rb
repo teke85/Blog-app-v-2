@@ -1,6 +1,7 @@
+# Controller for handling user pages.
 class UsersController < ApplicationController
   def index
-    @users = User.all # Fetch all users from the database
+    @users = User.all
   end
 
   def show
