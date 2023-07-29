@@ -1535,5 +1535,3 @@ Processing by UsersController#index as HTML
   Rendered layouts/_footer.html.erb (Duration: 0.1ms | Allocations: 8)
   Rendered layout layouts/application.html.erb (Duration: 22.3ms | Allocations: 4448)
 Completed 200 OK in 31ms (Views: 23.1ms | ActiveRecord: 0.9ms | Allocations: 5375)
-
-
