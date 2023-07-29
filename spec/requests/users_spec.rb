@@ -17,7 +17,7 @@ RSpec.describe 'Users', type: :request do
       expect(response).to have_http_status(200)
     end
 
-     it 'user responsed body with correct place holder' do
+    it 'user responsed body with correct place holder' do
       get '/users/'
       expect(response.body).to include('<h1>All users page placeholder</h1>')
     end
