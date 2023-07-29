@@ -2,12 +2,10 @@
 class PostsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
-    @posts = @user.posts  # Initialize the @posts variable with the posts associated with the user
-  
-    # Add logging
-  Rails.logger.info("User: #{@user}")
-  Rails.logger.info("Posts: #{@posts}")
-  
+    @posts = @user.posts # Initialize the @posts variable with the posts associated with the user
+    # Add logging for debugging
+    Rails.logger.info("User: #{@user}")
+    Rails.logger.info("Posts: #{@posts}")
   end
 
   def show
@@ -16,7 +14,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new  # Initialize a new post without associating it with the current user
+    @post = Post.new # Initialize a new post without associating it with the current user
   end
 
   def create
