@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 1920px;
+}
+
+.user-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.user-image {
+  border: 1px solid #000;
+  height: 8rem;
+}
+
+.users-details {
+  width: 100%;
+  display: flex;
+  padding: 2rem;
+}
+
+.box {
+  padding: 2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border: 1px solid #000;
+}
+
+.right-col {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  width: 100%;
+}
