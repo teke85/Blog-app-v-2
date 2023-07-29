@@ -1,6 +1,5 @@
 require 'rails_helper'
 RSpec.describe 'Posts', type: :request do
-
   let!(:user) do
     User.create(name: 'Anything',
                 photo: 'http://licalhost:3000/anything.jpg',
