@@ -1,799 +1,156 @@
-  [1m[35m (21644.4ms)[0m  [1m[35mCREATE DATABASE "Blog_app_v_2_development" ENCODING = 'unicode'[0m
-  [1m[35m (1921.9ms)[0m  [1m[35mCREATE DATABASE "Blog_app_v_2_test" ENCODING = 'unicode'[0m
-Started GET "/" for 127.0.0.1 at 2023-07-14 11:03:22 +0200
-Processing by Rails::WelcomeController#index as HTML
-  Rendering C:/Ruby31-x64/lib/ruby/gems/3.1.0/gems/railties-7.0.6/lib/rails/templates/rails/welcome/index.html.erb
-  Rendered C:/Ruby31-x64/lib/ruby/gems/3.1.0/gems/railties-7.0.6/lib/rails/templates/rails/welcome/index.html.erb (Duration: 336.9ms | Allocations: 683)
-Completed 200 OK in 4349ms (Views: 1433.5ms | ActiveRecord: 0.0ms | Allocations: 7778)
+Started GET "/" for 127.0.0.1 at 2023-07-14 10:08:09 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (389.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#hello as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering pages/hello.html.erb within layouts/application
+  Rendered pages/hello.html.erb within layouts/application (Duration: 172.9ms | Allocations: 492)
+  Rendered layout layouts/application.html.erb (Duration: 7217.3ms | Allocations: 78761)
+Completed 200 OK in 8416ms (Views: 7738.9ms | ActiveRecord: 0.0ms | Allocations: 83875)
 
 
-  [1m[35m (749.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
-  [1m[35m (189.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
-  [1m[35m (17.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7938305601545948895)[0m
-  [1m[36mActiveRecord::SchemaMigration Pluck (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-Migrating to CreateUsers (20230715031503)
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (230.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "photo" character varying, "bio" text, "posts_counter" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
-  [1m[36mActiveRecord::SchemaMigration Create (20.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230715031503"]]
-  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT[0m
-Migrating to CreatePost (20230715031834)
-  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (148.5ms)[0m  [1m[35mCREATE TABLE "posts" ("id" bigserial primary key, "author_id" bigint, "title" character varying, "text" text, "comments_counter" integer DEFAULT 0, "likes_counter" integer DEFAULT 0, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_04d13ef8c7"
-FOREIGN KEY ("author_id")
-  REFERENCES "users" ("id")
-)[0m
-  [1m[35m (100.2ms)[0m  [1m[35mCREATE INDEX "index_posts_on_author_id" ON "posts" ("author_id")[0m
-  [1m[36mActiveRecord::SchemaMigration Create (30.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230715031834"]]
-  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
-Migrating to CreateComment (20230715031904)
-  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (354.4ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "author_id" bigint, "post_id" bigint, "text" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_f44b1e3c8a"
-FOREIGN KEY ("author_id")
-  REFERENCES "users" ("id")
-, CONSTRAINT "fk_rails_2fd19c0db7"
-FOREIGN KEY ("post_id")
-  REFERENCES "posts" ("id")
-)[0m
-  [1m[35m (71.9ms)[0m  [1m[35mCREATE INDEX "index_comments_on_author_id" ON "comments" ("author_id")[0m
-  [1m[35m (62.3ms)[0m  [1m[35mCREATE INDEX "index_comments_on_post_id" ON "comments" ("post_id")[0m
-  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230715031904"]]
-  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
-Migrating to CreateLike (20230715032109)
-  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
-  [1m[35m (240.7ms)[0m  [1m[35mCREATE TABLE "likes" ("id" bigserial primary key, "author_id" bigint, "post_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_1f2302367a"
-FOREIGN KEY ("author_id")
-  REFERENCES "users" ("id")
-, CONSTRAINT "fk_rails_87a8aac469"
-FOREIGN KEY ("post_id")
-  REFERENCES "posts" ("id")
-)[0m
-  [1m[35m (72.5ms)[0m  [1m[35mCREATE INDEX "index_likes_on_author_id" ON "likes" ("author_id")[0m
-  [1m[35m (97.9ms)[0m  [1m[35mCREATE INDEX "index_likes_on_post_id" ON "likes" ("post_id")[0m
-  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230715032109"]]
-  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mActiveRecord::InternalMetadata Create (15.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-07-15 03:23:32.095467"], ["updated_at", "2023-07-15 03:23:32.095467"]]
-  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
-  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(7938305601545948895)[0m
-  [1m[36mActiveRecord::SchemaMigration Pluck (30.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mUser Create (327.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "photo", "bio", "posts_counter", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Tom"], ["photo", "https://unsplash.com/photos/F_-0BxGuVvo"], ["bio", "Teacher from Mexico."], ["posts_counter", nil], ["created_at", "2023-07-15 14:56:34.581775"], ["updated_at", "2023-07-15 14:56:34.581775"]]
-  [1m[36mTRANSACTION (65.2ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "photo", "bio", "posts_counter", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Lilly"], ["photo", "https://unsplash.com/photos/F_-0BxGuVvo"], ["bio", "Teacher from Poland."], ["posts_counter", nil], ["created_at", "2023-07-15 14:57:26.809433"], ["updated_at", "2023-07-15 14:57:26.809433"]]
-  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mPost Create (285.0ms)[0m  [1m[32mINSERT INTO "posts" ("author_id", "title", "text", "comments_counter", "likes_counter", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["author_id", 1], ["title", "Hello"], ["text", "This is my first post"], ["comments_counter", 0], ["likes_counter", 0], ["created_at", "2023-07-15 14:59:15.068245"], ["updated_at", "2023-07-15 14:59:15.068245"]]
-  [1m[36mPost Count (70.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "posts" WHERE "posts"."author_id" = $1[0m  [["author_id", 1]]
-  [1m[36mUser Update (28.5ms)[0m  [1m[33mUPDATE "users" SET "posts_counter" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["posts_counter", 1], ["updated_at", "2023-07-15 14:59:15.924813"], ["id", 1]]
-  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mPost Create (0.8ms)[0m  [1m[32mINSERT INTO "posts" ("author_id", "title", "text", "comments_counter", "likes_counter", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["author_id", 1], ["title", "Cheers"], ["text", "This is my second post"], ["comments_counter", 0], ["likes_counter", 0], ["created_at", "2023-07-15 15:00:47.682611"], ["updated_at", "2023-07-15 15:00:47.682611"]]
-  [1m[36mPost Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "posts" WHERE "posts"."author_id" = $1[0m  [["author_id", 1]]
-  [1m[36mUser Update (0.6ms)[0m  [1m[33mUPDATE "users" SET "posts_counter" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["posts_counter", 2], ["updated_at", "2023-07-15 15:00:47.688798"], ["id", 1]]
-  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mPost Create (0.6ms)[0m  [1m[32mINSERT INTO "posts" ("author_id", "title", "text", "comments_counter", "likes_counter", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["author_id", 1], ["title", "Microverse"], ["text", "This is my third post"], ["comments_counter", 0], ["likes_counter", 0], ["created_at", "2023-07-15 15:01:42.883472"], ["updated_at", "2023-07-15 15:01:42.883472"]]
-  [1m[36mPost Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "posts" WHERE "posts"."author_id" = $1[0m  [["author_id", 1]]
-  [1m[36mUser Update (0.4ms)[0m  [1m[33mUPDATE "users" SET "posts_counter" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["posts_counter", 3], ["updated_at", "2023-07-15 15:01:42.889341"], ["id", 1]]
-  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mPost Create (0.7ms)[0m  [1m[32mINSERT INTO "posts" ("author_id", "title", "text", "comments_counter", "likes_counter", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["author_id", 1], ["title", "Coding"], ["text", "This is my fourth post"], ["comments_counter", 0], ["likes_counter", 0], ["created_at", "2023-07-15 15:02:18.841350"], ["updated_at", "2023-07-15 15:02:18.841350"]]
-  [1m[36mPost Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "posts" WHERE "posts"."author_id" = $1[0m  [["author_id", 1]]
-  [1m[36mUser Update (0.5ms)[0m  [1m[33mUPDATE "users" SET "posts_counter" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["posts_counter", 4], ["updated_at", "2023-07-15 15:02:18.846478"], ["id", 1]]
-  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mComment Create (157.7ms)[0m  [1m[32mINSERT INTO "comments" ("author_id", "post_id", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["author_id", 2], ["post_id", 1], ["text", "Hi Tom!"], ["created_at", "2023-07-15 15:03:04.323778"], ["updated_at", "2023-07-15 15:03:04.323778"]]
-  [1m[36mPost Update All (1.2ms)[0m  [1m[33mUPDATE "posts" SET "comments_counter" = COALESCE("comments_counter", 0) + $1 WHERE "posts"."id" = $2[0m  [["comments_counter", 1], ["id", 1]]
-  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mComment Create (1.0ms)[0m  [1m[32mINSERT INTO "comments" ("author_id", "post_id", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["author_id", 2], ["post_id", 1], ["text", "Hi Teke!"], ["created_at", "2023-07-15 15:04:41.564336"], ["updated_at", "2023-07-15 15:04:41.564336"]]
-  [1m[36mPost Update All (0.6ms)[0m  [1m[33mUPDATE "posts" SET "comments_counter" = COALESCE("comments_counter", 0) + $1 WHERE "posts"."id" = $2[0m  [["comments_counter", 1], ["id", 1]]
-  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mComment Create (0.7ms)[0m  [1m[32mINSERT INTO "comments" ("author_id", "post_id", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["author_id", 2], ["post_id", 1], ["text", "Hi john!"], ["created_at", "2023-07-15 15:04:52.328761"], ["updated_at", "2023-07-15 15:04:52.328761"]]
-  [1m[36mPost Update All (0.5ms)[0m  [1m[33mUPDATE "posts" SET "comments_counter" = COALESCE("comments_counter", 0) + $1 WHERE "posts"."id" = $2[0m  [["comments_counter", 1], ["id", 1]]
-  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mComment Create (0.7ms)[0m  [1m[32mINSERT INTO "comments" ("author_id", "post_id", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["author_id", 2], ["post_id", 1], ["text", "Hi Charles!"], ["created_at", "2023-07-15 15:05:02.879461"], ["updated_at", "2023-07-15 15:05:02.879461"]]
-  [1m[36mPost Update All (0.5ms)[0m  [1m[33mUPDATE "posts" SET "comments_counter" = COALESCE("comments_counter", 0) + $1 WHERE "posts"."id" = $2[0m  [["comments_counter", 1], ["id", 1]]
-  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mComment Create (0.8ms)[0m  [1m[32mINSERT INTO "comments" ("author_id", "post_id", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["author_id", 2], ["post_id", 1], ["text", "Hi Ben!"], ["created_at", "2023-07-15 15:05:11.601600"], ["updated_at", "2023-07-15 15:05:11.601600"]]
-  [1m[36mPost Update All (0.6ms)[0m  [1m[33mUPDATE "posts" SET "comments_counter" = COALESCE("comments_counter", 0) + $1 WHERE "posts"."id" = $2[0m  [["comments_counter", 1], ["id", 1]]
-  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mComment Create (0.8ms)[0m  [1m[32mINSERT INTO "comments" ("author_id", "post_id", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["author_id", 2], ["post_id", 1], ["text", "Hi Chris!"], ["created_at", "2023-07-15 15:05:21.813575"], ["updated_at", "2023-07-15 15:05:21.813575"]]
-  [1m[36mPost Update All (0.6ms)[0m  [1m[33mUPDATE "posts" SET "comments_counter" = COALESCE("comments_counter", 0) + $1 WHERE "posts"."id" = $2[0m  [["comments_counter", 1], ["id", 1]]
-  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mComment Create (0.6ms)[0m  [1m[32mINSERT INTO "comments" ("author_id", "post_id", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["author_id", 2], ["post_id", 1], ["text", "Hi Mary!"], ["created_at", "2023-07-15 15:05:29.473984"], ["updated_at", "2023-07-15 15:05:29.473984"]]
-  [1m[36mPost Update All (0.5ms)[0m  [1m[33mUPDATE "posts" SET "comments_counter" = COALESCE("comments_counter", 0) + $1 WHERE "posts"."id" = $2[0m  [["comments_counter", 1], ["id", 1]]
-  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mComment Create (0.6ms)[0m  [1m[32mINSERT INTO "comments" ("author_id", "post_id", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["author_id", 2], ["post_id", 1], ["text", "Hi Bruce!"], ["created_at", "2023-07-15 15:05:36.312150"], ["updated_at", "2023-07-15 15:05:36.312150"]]
-  [1m[36mPost Update All (0.6ms)[0m  [1m[33mUPDATE "posts" SET "comments_counter" = COALESCE("comments_counter", 0) + $1 WHERE "posts"."id" = $2[0m  [["comments_counter", 1], ["id", 1]]
-  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = $1 LIMIT $2[0m  [["name", "Tom"], ["LIMIT", 1]]
-  [1m[36mPost Load (0.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = $1 ORDER BY "posts"."created_at" DESC LIMIT $2[0m  [["author_id", 1], ["LIMIT", 3]]
-  [1m[36mPost Load (0.8ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
-  [1m[36mPost Load (0.7ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
-  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
-  [1m[36mComment Load (0.9ms)[0m  [1m[34mSELECT "comments".* FROM "comments"[0m
-  [1m[36mUser Load (96.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = $1 LIMIT $2[0m  [["name", "Tom"], ["LIMIT", 1]]
-  [1m[36mPost Load (1.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = $1 ORDER BY "posts"."created_at" DESC LIMIT $2[0m  [["author_id", 1], ["LIMIT", 3]]
-  [1m[36mUser Load (38.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
-  [1m[36mComment Load (1.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments"[0m
-  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
-Started GET "/" for 127.0.0.1 at 2023-07-15 23:02:31 +0200
-  [1m[36mActiveRecord::SchemaMigration Pluck (104.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-Processing by Rails::WelcomeController#index as HTML
-  Rendering C:/Ruby31-x64/lib/ruby/gems/3.1.0/gems/railties-7.0.6/lib/rails/templates/rails/welcome/index.html.erb
-  Rendered C:/Ruby31-x64/lib/ruby/gems/3.1.0/gems/railties-7.0.6/lib/rails/templates/rails/welcome/index.html.erb (Duration: 60.3ms | Allocations: 554)
-Completed 200 OK in 689ms (Views: 151.9ms | ActiveRecord: 0.0ms | Allocations: 4981)
-
-
-  [1m[35m (77.1ms)[0m  [1m[35mCREATE DATABASE "Blog_app_v_2_development" ENCODING = 'unicode'[0m
-  [1m[35m (1.4ms)[0m  [1m[35mCREATE DATABASE "Blog_app_v_2_test" ENCODING = 'unicode'[0m
-  [1m[36mActiveRecord::SchemaMigration Pluck (109.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mUser Exists? (29.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."name") = LOWER($1) LIMIT $2[0m  [["name", "Tom"], ["LIMIT", 1]]
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."name") = LOWER($1) LIMIT $2[0m  [["name", "Lilly"], ["LIMIT", 1]]
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."name") = LOWER($1) LIMIT $2[0m  [["name", "Tom"], ["LIMIT", 1]]
-  [1m[36mPost Create (125.8ms)[0m  [1m[32mINSERT INTO "posts" ("author_id", "title", "text", "comments_counter", "likes_counter", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["author_id", nil], ["title", "Hello"], ["text", "This is my first post"], ["comments_counter", 0], ["likes_counter", 0], ["created_at", "2023-07-20 09:34:19.473722"], ["updated_at", "2023-07-20 09:34:19.473722"]]
-  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."name") = LOWER($1) LIMIT $2[0m  [["name", "Tom"], ["LIMIT", 1]]
-  ↳ app/models/post.rb:19:in `update_post_counter'
-  [1m[36mTRANSACTION (87.1ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mCACHE User Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."name") = LOWER($1) LIMIT $2[0m  [["name", "Tom"], ["LIMIT", 1]]
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mPost Create (0.7ms)[0m  [1m[32mINSERT INTO "posts" ("author_id", "title", "text", "comments_counter", "likes_counter", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["author_id", nil], ["title", "Cheers"], ["text", "This is my second post"], ["comments_counter", 0], ["likes_counter", 0], ["created_at", "2023-07-20 09:34:20.377081"], ["updated_at", "2023-07-20 09:34:20.377081"]]
-  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."name") = LOWER($1) LIMIT $2[0m  [["name", "Tom"], ["LIMIT", 1]]
-  ↳ app/models/post.rb:19:in `update_post_counter'
-  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mCACHE User Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."name") = LOWER($1) LIMIT $2[0m  [["name", "Tom"], ["LIMIT", 1]]
-  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mPost Create (0.8ms)[0m  [1m[32mINSERT INTO "posts" ("author_id", "title", "text", "comments_counter", "likes_counter", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["author_id", nil], ["title", "Time to fly"], ["text", "This is my third post"], ["comments_counter", 0], ["likes_counter", 0], ["created_at", "2023-07-20 09:34:20.394026"], ["updated_at", "2023-07-20 09:34:20.394026"]]
-  [1m[36mUser Exists? (3.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."name") = LOWER($1) LIMIT $2[0m  [["name", "Tom"], ["LIMIT", 1]]
-  ↳ app/models/post.rb:19:in `update_post_counter'
-  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mCACHE User Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."name") = LOWER($1) LIMIT $2[0m  [["name", "Tom"], ["LIMIT", 1]]
-  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mPost Create (2.0ms)[0m  [1m[32mINSERT INTO "posts" ("author_id", "title", "text", "comments_counter", "likes_counter", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["author_id", nil], ["title", "Amazing grace"], ["text", "This is my fourth post"], ["comments_counter", 0], ["likes_counter", 0], ["created_at", "2023-07-20 09:34:20.437621"], ["updated_at", "2023-07-20 09:34:20.437621"]]
-  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."name") = LOWER($1) LIMIT $2[0m  [["name", "Tom"], ["LIMIT", 1]]
-  ↳ app/models/post.rb:19:in `update_post_counter'
-  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."name") = LOWER($1) LIMIT $2[0m  [["name", "Lilly"], ["LIMIT", 1]]
-  [1m[36mComment Create (86.8ms)[0m  [1m[32mINSERT INTO "comments" ("author_id", "post_id", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["author_id", nil], ["post_id", 5], ["text", "Hi Tom!"], ["created_at", "2023-07-20 09:34:20.834490"], ["updated_at", "2023-07-20 09:34:20.834490"]]
-  [1m[36mPost Update All (136.8ms)[0m  [1m[33mUPDATE "posts" SET "comments_counter" = COALESCE("comments_counter", 0) + $1 WHERE "posts"."id" = $2[0m  [["comments_counter", 1], ["id", 5]]
-  ↳ app/models/comment.rb:10:in `update_comments_counter'
-  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."name") = LOWER($1) LIMIT $2[0m  [["name", "Lilly"], ["LIMIT", 1]]
-  [1m[36mComment Create (0.8ms)[0m  [1m[32mINSERT INTO "comments" ("author_id", "post_id", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["author_id", nil], ["post_id", 5], ["text", "Hi Teke!"], ["created_at", "2023-07-20 09:34:21.078899"], ["updated_at", "2023-07-20 09:34:21.078899"]]
-  [1m[36mPost Update All (0.7ms)[0m  [1m[33mUPDATE "posts" SET "comments_counter" = COALESCE("comments_counter", 0) + $1 WHERE "posts"."id" = $2[0m  [["comments_counter", 1], ["id", 5]]
-  ↳ app/models/comment.rb:10:in `update_comments_counter'
-  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."name") = LOWER($1) LIMIT $2[0m  [["name", "Lilly"], ["LIMIT", 1]]
-  [1m[36mComment Create (1.0ms)[0m  [1m[32mINSERT INTO "comments" ("author_id", "post_id", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["author_id", nil], ["post_id", 5], ["text", "Hi John!"], ["created_at", "2023-07-20 09:34:21.100493"], ["updated_at", "2023-07-20 09:34:21.100493"]]
-  [1m[36mPost Update All (0.6ms)[0m  [1m[33mUPDATE "posts" SET "comments_counter" = COALESCE("comments_counter", 0) + $1 WHERE "posts"."id" = $2[0m  [["comments_counter", 1], ["id", 5]]
-  ↳ app/models/comment.rb:10:in `update_comments_counter'
-  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."name") = LOWER($1) LIMIT $2[0m  [["name", "Lilly"], ["LIMIT", 1]]
-  [1m[36mComment Create (0.8ms)[0m  [1m[32mINSERT INTO "comments" ("author_id", "post_id", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["author_id", nil], ["post_id", 5], ["text", "Hi Charles!"], ["created_at", "2023-07-20 09:34:21.119007"], ["updated_at", "2023-07-20 09:34:21.119007"]]
-  [1m[36mPost Update All (0.8ms)[0m  [1m[33mUPDATE "posts" SET "comments_counter" = COALESCE("comments_counter", 0) + $1 WHERE "posts"."id" = $2[0m  [["comments_counter", 1], ["id", 5]]
-  ↳ app/models/comment.rb:10:in `update_comments_counter'
-  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."name") = LOWER($1) LIMIT $2[0m  [["name", "Lilly"], ["LIMIT", 1]]
-  [1m[36mComment Create (0.8ms)[0m  [1m[32mINSERT INTO "comments" ("author_id", "post_id", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["author_id", nil], ["post_id", 5], ["text", "Hi Ben!"], ["created_at", "2023-07-20 09:34:21.140579"], ["updated_at", "2023-07-20 09:34:21.140579"]]
-  [1m[36mPost Update All (0.6ms)[0m  [1m[33mUPDATE "posts" SET "comments_counter" = COALESCE("comments_counter", 0) + $1 WHERE "posts"."id" = $2[0m  [["comments_counter", 1], ["id", 5]]
-  ↳ app/models/comment.rb:10:in `update_comments_counter'
-  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
-  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
-  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."name") = LOWER($1) LIMIT $2[0m  [["name", "Lilly"], ["LIMIT", 1]]
-  [1m[36mComment Create (0.7ms)[0m  [1m[32mINSERT INTO "comments" ("author_id", "post_id", "text", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["author_id", nil], ["post_id", 5], ["text", "Hi Chris!"], ["created_at", "2023-07-20 09:34:21.176650"], ["updated_at", "2023-07-20 09:34:21.176650"]]
-  [1m[36mPost Update All (0.6ms)[0m  [1m[33mUPDATE "posts" SET "comments_counter" = COALESCE("comments_counter", 0) + $1 WHERE "posts"."id" = $2[0m  [["comments_counter", 1], ["id", 5]]
-  ↳ app/models/comment.rb:10:in `update_comments_counter'
-  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
-  [1m[35m (2.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7938305601545948895)[0m
-  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-  [1m[36mActiveRecord::InternalMetadata Load (120.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
-  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(7938305601545948895)[0m
-  [1m[36mActiveRecord::SchemaMigration Pluck (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-Started GET "/" for 127.0.0.1 at 2023-07-28 11:43:24 +0200
-  [1m[36mActiveRecord::SchemaMigration Pluck (59.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-  
-ActionController::RoutingError (uninitialized constant PagesController
-
-      Object.const_get(camel_cased_word)
-            ^^^^^^^^^^
-
-            raise MissingController.new(error.message, error.name)
-            ^^^^^):
-  
-Started GET "/" for 127.0.0.1 at 2023-07-28 11:54:49 +0200
-  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-  
-AbstractController::ActionNotFound (The action 'home' could not be found for PagesController):
-  
-actionpack (7.0.6) lib/abstract_controller/base.rb:146:in `process'
-actionview (7.0.6) lib/action_view/rendering.rb:39:in `process'
-actionpack (7.0.6) lib/action_controller/metal.rb:188:in `dispatch'
-actionpack (7.0.6) lib/action_controller/metal.rb:251:in `dispatch'
-actionpack (7.0.6) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
-actionpack (7.0.6) lib/action_dispatch/routing/route_set.rb:32:in `serve'
-actionpack (7.0.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
-actionpack (7.0.6) lib/action_dispatch/journey/router.rb:32:in `each'
-actionpack (7.0.6) lib/action_dispatch/journey/router.rb:32:in `serve'
-actionpack (7.0.6) lib/action_dispatch/routing/route_set.rb:852:in `call'
-rack (2.2.7) lib/rack/tempfile_reaper.rb:15:in `call'
-rack (2.2.7) lib/rack/etag.rb:27:in `call'
-rack (2.2.7) lib/rack/conditional_get.rb:27:in `call'
-rack (2.2.7) lib/rack/head.rb:12:in `call'
-actionpack (7.0.6) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
-actionpack (7.0.6) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
-rack (2.2.7) lib/rack/session/abstract/id.rb:266:in `context'
-rack (2.2.7) lib/rack/session/abstract/id.rb:260:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/cookies.rb:704:in `call'
-activerecord (7.0.6) lib/active_record/migration.rb:603:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
-activesupport (7.0.6) lib/active_support/callbacks.rb:99:in `run_callbacks'
-actionpack (7.0.6) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
-web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
-web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
-web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
-web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
-railties (7.0.6) lib/rails/rack/logger.rb:40:in `call_app'
-railties (7.0.6) lib/rails/rack/logger.rb:25:in `block in call'
-activesupport (7.0.6) lib/active_support/tagged_logging.rb:99:in `block in tagged'
-activesupport (7.0.6) lib/active_support/tagged_logging.rb:37:in `tagged'
-activesupport (7.0.6) lib/active_support/tagged_logging.rb:99:in `tagged'
-railties (7.0.6) lib/rails/rack/logger.rb:25:in `call'
-sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/request_id.rb:26:in `call'
-rack (2.2.7) lib/rack/method_override.rb:24:in `call'
-rack (2.2.7) lib/rack/runtime.rb:22:in `call'
-activesupport (7.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
-actionpack (7.0.6) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
-actionpack (7.0.6) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/static.rb:23:in `call'
-rack (2.2.7) lib/rack/sendfile.rb:110:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
-railties (7.0.6) lib/rails/engine.rb:530:in `call'
-puma (5.6.5) lib/puma/configuration.rb:252:in `call'
-puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
-puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
-puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
-puma (5.6.5) lib/puma/server.rb:443:in `process_client'
-puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
-Started GET "/" for 127.0.0.1 at 2023-07-28 12:02:17 +0200
-  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-Processing by PagesController#home as HTML
-Completed 406 Not Acceptable in 129ms (ActiveRecord: 0.0ms | Allocations: 2875)
-
-
-  
-ActionController::MissingExactTemplate (PagesController#home is missing a template for request formats: text/html):
-  
-actionpack (7.0.6) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
-actionpack (7.0.6) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
-actionpack (7.0.6) lib/abstract_controller/base.rb:215:in `process_action'
-actionpack (7.0.6) lib/action_controller/metal/rendering.rb:165:in `process_action'
-actionpack (7.0.6) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
-activesupport (7.0.6) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
-actiontext (7.0.6) lib/action_text/rendering.rb:20:in `with_renderer'
-actiontext (7.0.6) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
-activesupport (7.0.6) lib/active_support/callbacks.rb:127:in `instance_exec'
-activesupport (7.0.6) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
-activesupport (7.0.6) lib/active_support/callbacks.rb:138:in `run_callbacks'
-actionpack (7.0.6) lib/abstract_controller/callbacks.rb:233:in `process_action'
-actionpack (7.0.6) lib/action_controller/metal/rescue.rb:23:in `process_action'
-actionpack (7.0.6) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
-activesupport (7.0.6) lib/active_support/notifications.rb:206:in `block in instrument'
-activesupport (7.0.6) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
-activesupport (7.0.6) lib/active_support/notifications.rb:206:in `instrument'
-actionpack (7.0.6) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
-actionpack (7.0.6) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
-activerecord (7.0.6) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
-actionpack (7.0.6) lib/abstract_controller/base.rb:151:in `process'
-actionview (7.0.6) lib/action_view/rendering.rb:39:in `process'
-actionpack (7.0.6) lib/action_controller/metal.rb:188:in `dispatch'
-actionpack (7.0.6) lib/action_controller/metal.rb:251:in `dispatch'
-actionpack (7.0.6) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
-actionpack (7.0.6) lib/action_dispatch/routing/route_set.rb:32:in `serve'
-actionpack (7.0.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
-actionpack (7.0.6) lib/action_dispatch/journey/router.rb:32:in `each'
-actionpack (7.0.6) lib/action_dispatch/journey/router.rb:32:in `serve'
-actionpack (7.0.6) lib/action_dispatch/routing/route_set.rb:852:in `call'
-rack (2.2.7) lib/rack/tempfile_reaper.rb:15:in `call'
-rack (2.2.7) lib/rack/etag.rb:27:in `call'
-rack (2.2.7) lib/rack/conditional_get.rb:27:in `call'
-rack (2.2.7) lib/rack/head.rb:12:in `call'
-actionpack (7.0.6) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
-actionpack (7.0.6) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
-rack (2.2.7) lib/rack/session/abstract/id.rb:266:in `context'
-rack (2.2.7) lib/rack/session/abstract/id.rb:260:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/cookies.rb:704:in `call'
-activerecord (7.0.6) lib/active_record/migration.rb:603:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
-activesupport (7.0.6) lib/active_support/callbacks.rb:99:in `run_callbacks'
-actionpack (7.0.6) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
-web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
-web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
-web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
-web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
-railties (7.0.6) lib/rails/rack/logger.rb:40:in `call_app'
-railties (7.0.6) lib/rails/rack/logger.rb:25:in `block in call'
-activesupport (7.0.6) lib/active_support/tagged_logging.rb:99:in `block in tagged'
-activesupport (7.0.6) lib/active_support/tagged_logging.rb:37:in `tagged'
-activesupport (7.0.6) lib/active_support/tagged_logging.rb:99:in `tagged'
-railties (7.0.6) lib/rails/rack/logger.rb:25:in `call'
-sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/request_id.rb:26:in `call'
-rack (2.2.7) lib/rack/method_override.rb:24:in `call'
-rack (2.2.7) lib/rack/runtime.rb:22:in `call'
-activesupport (7.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
-actionpack (7.0.6) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
-actionpack (7.0.6) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/static.rb:23:in `call'
-rack (2.2.7) lib/rack/sendfile.rb:110:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
-railties (7.0.6) lib/rails/engine.rb:530:in `call'
-puma (5.6.5) lib/puma/configuration.rb:252:in `call'
-puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
-puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
-puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
-puma (5.6.5) lib/puma/server.rb:443:in `process_client'
-puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
-Started GET "/" for 127.0.0.1 at 2023-07-28 12:07:52 +0200
-  [1m[36mActiveRecord::SchemaMigration Pluck (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-  
-ActionController::RoutingError (uninitialized constant PagesController
-
-      Object.const_get(camel_cased_word)
-            ^^^^^^^^^^
-
-            raise MissingController.new(error.message, error.name)
-            ^^^^^):
-  
-Started GET "/" for 127.0.0.1 at 2023-07-28 12:15:18 +0200
-  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-  
-ActionController::RoutingError (uninitialized constant PagesController
-
-      Object.const_get(camel_cased_word)
-            ^^^^^^^^^^
-
-            raise MissingController.new(error.message, error.name)
-            ^^^^^):
-  
-Started GET "/" for 127.0.0.1 at 2023-07-28 12:17:55 +0200
-  [1m[36mActiveRecord::SchemaMigration Pluck (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-  
-AbstractController::ActionNotFound (The action 'home' could not be found for PagesController):
-  
-actionpack (7.0.6) lib/abstract_controller/base.rb:146:in `process'
-actionview (7.0.6) lib/action_view/rendering.rb:39:in `process'
-actionpack (7.0.6) lib/action_controller/metal.rb:188:in `dispatch'
-actionpack (7.0.6) lib/action_controller/metal.rb:251:in `dispatch'
-actionpack (7.0.6) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
-actionpack (7.0.6) lib/action_dispatch/routing/route_set.rb:32:in `serve'
-actionpack (7.0.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
-actionpack (7.0.6) lib/action_dispatch/journey/router.rb:32:in `each'
-actionpack (7.0.6) lib/action_dispatch/journey/router.rb:32:in `serve'
-actionpack (7.0.6) lib/action_dispatch/routing/route_set.rb:852:in `call'
-rack (2.2.7) lib/rack/tempfile_reaper.rb:15:in `call'
-rack (2.2.7) lib/rack/etag.rb:27:in `call'
-rack (2.2.7) lib/rack/conditional_get.rb:27:in `call'
-rack (2.2.7) lib/rack/head.rb:12:in `call'
-actionpack (7.0.6) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
-actionpack (7.0.6) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
-rack (2.2.7) lib/rack/session/abstract/id.rb:266:in `context'
-rack (2.2.7) lib/rack/session/abstract/id.rb:260:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/cookies.rb:704:in `call'
-activerecord (7.0.6) lib/active_record/migration.rb:603:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
-activesupport (7.0.6) lib/active_support/callbacks.rb:99:in `run_callbacks'
-actionpack (7.0.6) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
-web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
-web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
-web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
-web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
-railties (7.0.6) lib/rails/rack/logger.rb:40:in `call_app'
-railties (7.0.6) lib/rails/rack/logger.rb:25:in `block in call'
-activesupport (7.0.6) lib/active_support/tagged_logging.rb:99:in `block in tagged'
-activesupport (7.0.6) lib/active_support/tagged_logging.rb:37:in `tagged'
-activesupport (7.0.6) lib/active_support/tagged_logging.rb:99:in `tagged'
-railties (7.0.6) lib/rails/rack/logger.rb:25:in `call'
-sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/request_id.rb:26:in `call'
-rack (2.2.7) lib/rack/method_override.rb:24:in `call'
-rack (2.2.7) lib/rack/runtime.rb:22:in `call'
-activesupport (7.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
-actionpack (7.0.6) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
-actionpack (7.0.6) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/static.rb:23:in `call'
-rack (2.2.7) lib/rack/sendfile.rb:110:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
-railties (7.0.6) lib/rails/engine.rb:530:in `call'
-puma (5.6.5) lib/puma/configuration.rb:252:in `call'
-puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
-puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
-puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
-puma (5.6.5) lib/puma/server.rb:443:in `process_client'
-puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
-Started GET "/" for 127.0.0.1 at 2023-07-28 12:20:53 +0200
-  [1m[36mActiveRecord::SchemaMigration Pluck (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-Processing by PagesController#home as HTML
-Completed 406 Not Acceptable in 31ms (ActiveRecord: 0.0ms | Allocations: 2379)
-
-
-  
-ActionController::MissingExactTemplate (PagesController#home is missing a template for request formats: text/html):
-  
-actionpack (7.0.6) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
-actionpack (7.0.6) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
-actionpack (7.0.6) lib/abstract_controller/base.rb:215:in `process_action'
-actionpack (7.0.6) lib/action_controller/metal/rendering.rb:165:in `process_action'
-actionpack (7.0.6) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
-activesupport (7.0.6) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
-actiontext (7.0.6) lib/action_text/rendering.rb:20:in `with_renderer'
-actiontext (7.0.6) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
-activesupport (7.0.6) lib/active_support/callbacks.rb:127:in `instance_exec'
-activesupport (7.0.6) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
-activesupport (7.0.6) lib/active_support/callbacks.rb:138:in `run_callbacks'
-actionpack (7.0.6) lib/abstract_controller/callbacks.rb:233:in `process_action'
-actionpack (7.0.6) lib/action_controller/metal/rescue.rb:23:in `process_action'
-actionpack (7.0.6) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
-activesupport (7.0.6) lib/active_support/notifications.rb:206:in `block in instrument'
-activesupport (7.0.6) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
-activesupport (7.0.6) lib/active_support/notifications.rb:206:in `instrument'
-actionpack (7.0.6) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
-actionpack (7.0.6) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
-activerecord (7.0.6) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
-actionpack (7.0.6) lib/abstract_controller/base.rb:151:in `process'
-actionview (7.0.6) lib/action_view/rendering.rb:39:in `process'
-actionpack (7.0.6) lib/action_controller/metal.rb:188:in `dispatch'
-actionpack (7.0.6) lib/action_controller/metal.rb:251:in `dispatch'
-actionpack (7.0.6) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
-actionpack (7.0.6) lib/action_dispatch/routing/route_set.rb:32:in `serve'
-actionpack (7.0.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
-actionpack (7.0.6) lib/action_dispatch/journey/router.rb:32:in `each'
-actionpack (7.0.6) lib/action_dispatch/journey/router.rb:32:in `serve'
-actionpack (7.0.6) lib/action_dispatch/routing/route_set.rb:852:in `call'
-rack (2.2.7) lib/rack/tempfile_reaper.rb:15:in `call'
-rack (2.2.7) lib/rack/etag.rb:27:in `call'
-rack (2.2.7) lib/rack/conditional_get.rb:27:in `call'
-rack (2.2.7) lib/rack/head.rb:12:in `call'
-actionpack (7.0.6) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
-actionpack (7.0.6) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
-rack (2.2.7) lib/rack/session/abstract/id.rb:266:in `context'
-rack (2.2.7) lib/rack/session/abstract/id.rb:260:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/cookies.rb:704:in `call'
-activerecord (7.0.6) lib/active_record/migration.rb:603:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
-activesupport (7.0.6) lib/active_support/callbacks.rb:99:in `run_callbacks'
-actionpack (7.0.6) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
-web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
-web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
-web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
-web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
-railties (7.0.6) lib/rails/rack/logger.rb:40:in `call_app'
-railties (7.0.6) lib/rails/rack/logger.rb:25:in `block in call'
-activesupport (7.0.6) lib/active_support/tagged_logging.rb:99:in `block in tagged'
-activesupport (7.0.6) lib/active_support/tagged_logging.rb:37:in `tagged'
-activesupport (7.0.6) lib/active_support/tagged_logging.rb:99:in `tagged'
-railties (7.0.6) lib/rails/rack/logger.rb:25:in `call'
-sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/request_id.rb:26:in `call'
-rack (2.2.7) lib/rack/method_override.rb:24:in `call'
-rack (2.2.7) lib/rack/runtime.rb:22:in `call'
-activesupport (7.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
-actionpack (7.0.6) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
-actionpack (7.0.6) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/static.rb:23:in `call'
-rack (2.2.7) lib/rack/sendfile.rb:110:in `call'
-actionpack (7.0.6) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
-railties (7.0.6) lib/rails/engine.rb:530:in `call'
-puma (5.6.5) lib/puma/configuration.rb:252:in `call'
-puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
-puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
-puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
-puma (5.6.5) lib/puma/server.rb:443:in `process_client'
-puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
-Started GET "/" for 127.0.0.1 at 2023-07-28 12:34:09 +0200
-  [1m[36mActiveRecord::SchemaMigration Pluck (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-Processing by PagesController#home as HTML
-  Rendering pages/home.html.erb
-  Rendered pages/home.html.erb (Duration: 4.3ms | Allocations: 397)
-Completed 200 OK in 134ms (Views: 76.0ms | ActiveRecord: 0.0ms | Allocations: 5090)
-
-
-Started GET "/user" for 127.0.0.1 at 2023-07-28 12:47:25 +0200
-  
-ActionController::RoutingError (No route matches [GET] "/user"):
-  
-Started GET "/users" for 127.0.0.1 at 2023-07-28 12:47:32 +0200
+Started GET "/" for 127.0.0.1 at 2023-07-29 06:11:57 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (81.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
 Processing by UsersController#index as HTML
-  Rendering users/index.html.erb
-  Rendered users/index.html.erb (Duration: 1.1ms | Allocations: 126)
-Completed 200 OK in 13ms (Views: 8.9ms | Allocations: 896)
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (212.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:4
+  Rendered users/index.html.erb within layouts/application (Duration: 562.8ms | Allocations: 6699)
+  Rendered layout layouts/application.html.erb (Duration: 2890.4ms | Allocations: 38292)
+Completed 200 OK in 3295ms (Views: 2671.9ms | ActiveRecord: 315.8ms | Allocations: 45203)
 
 
-Started GET "/posts" for 127.0.0.1 at 2023-07-28 12:47:42 +0200
-  
-ActionController::RoutingError (No route matches [GET] "/posts"):
-  
-Started GET "/post" for 127.0.0.1 at 2023-07-28 12:47:49 +0200
-  
-ActionController::RoutingError (No route matches [GET] "/post"):
-  
-Started GET "/users" for 127.0.0.1 at 2023-07-28 12:48:14 +0200
+Started GET "/" for 127.0.0.1 at 2023-07-29 06:27:59 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
 Processing by UsersController#index as HTML
-  Rendering users/index.html.erb
-  Rendered users/index.html.erb (Duration: 0.1ms | Allocations: 7)
-Completed 200 OK in 5ms (Views: 2.0ms | Allocations: 343)
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (3.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:4
+  Rendered users/index.html.erb within layouts/application (Duration: 562.4ms | Allocations: 6528)
+  Rendered layout layouts/application.html.erb (Duration: 5037.7ms | Allocations: 37602)
+Completed 200 OK in 5560ms (Views: 5175.6ms | ActiveRecord: 23.2ms | Allocations: 44234)
 
 
-Started GET "/users/id" for 127.0.0.1 at 2023-07-28 12:48:19 +0200
+Started GET "/users/8" for 127.0.0.1 at 2023-07-29 06:28:23 +0200
 Processing by UsersController#show as HTML
-  Parameters: {"id"=>"id"}
-  [1m[36mUser Load (52.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
-  ↳ app/controllers/users_controller.rb:3:in `show'
-Completed 404 Not Found in 732ms (ActiveRecord: 327.3ms | Allocations: 15701)
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (11.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mPost Load (1845.3ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = $1 ORDER BY "posts"."created_at" DESC LIMIT $2[0m  [["author_id", 8], ["LIMIT", 3]]
+  ↳ app/views/users/show.html.erb:18
+  Rendered users/show.html.erb within layouts/application (Duration: 2432.8ms | Allocations: 12502)
+  Rendered layout layouts/application.html.erb (Duration: 2450.6ms | Allocations: 15208)
+Completed 200 OK in 2852ms (Views: 602.3ms | ActiveRecord: 1864.1ms | Allocations: 23974)
 
 
-  
-ActiveRecord::RecordNotFound (Couldn't find User with 'id'=id):
-  
-app/controllers/users_controller.rb:3:in `show'
-Started GET "/users/" for 127.0.0.1 at 2023-07-28 12:48:35 +0200
-Processing by UsersController#index as HTML
-  Rendering users/index.html.erb
-  Rendered users/index.html.erb (Duration: 0.1ms | Allocations: 7)
-Completed 200 OK in 5ms (Views: 1.4ms | ActiveRecord: 0.0ms | Allocations: 364)
-
-
-Started GET "/users/1" for 127.0.0.1 at 2023-07-28 12:51:50 +0200
-Processing by UsersController#show as HTML
-  Parameters: {"id"=>"1"}
-  [1m[36mUser Load (42.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
-  ↳ app/controllers/users_controller.rb:3:in `show'
-  Rendering users/show.html.erb
-  Rendered users/show.html.erb (Duration: 1.3ms | Allocations: 124)
-Completed 200 OK in 364ms (Views: 3.1ms | ActiveRecord: 42.8ms | Allocations: 11870)
-
-
-Started GET "/users/2" for 127.0.0.1 at 2023-07-28 12:51:57 +0200
+Started GET "/users/2" for 127.0.0.1 at 2023-07-29 06:28:44 +0200
 Processing by UsersController#show as HTML
   Parameters: {"id"=>"2"}
   [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
-  ↳ app/controllers/users_controller.rb:3:in `show'
-  Rendering users/show.html.erb
-  Rendered users/show.html.erb (Duration: 0.1ms | Allocations: 7)
-Completed 200 OK in 9ms (Views: 1.8ms | ActiveRecord: 0.4ms | Allocations: 933)
+  ↳ app/controllers/users_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = $1 ORDER BY "posts"."created_at" DESC LIMIT $2[0m  [["author_id", 2], ["LIMIT", 3]]
+  ↳ app/views/users/show.html.erb:18
+  Rendered users/show.html.erb within layouts/application (Duration: 3.9ms | Allocations: 781)
+  Rendered layout layouts/application.html.erb (Duration: 19.5ms | Allocations: 3325)
+Completed 200 OK in 27ms (Views: 20.9ms | ActiveRecord: 1.0ms | Allocations: 4190)
 
 
-Started GET "/users/7" for 127.0.0.1 at 2023-07-28 12:52:04 +0200
-Processing by UsersController#show as HTML
-  Parameters: {"id"=>"7"}
-  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
-  ↳ app/controllers/users_controller.rb:3:in `show'
-Completed 404 Not Found in 7ms (ActiveRecord: 0.4ms | Allocations: 951)
+Started GET "/" for 127.0.0.1 at 2023-07-29 10:05:44 +0200
+Started GET "/users/2" for 127.0.0.1 at 2023-07-29 10:05:53 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (95.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (339.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:4
+  Rendered users/index.html.erb within layouts/application (Duration: 346.3ms | Allocations: 2844)
+  Rendered layout layouts/application.html.erb (Duration: 484.3ms | Allocations: 5691)
+Completed 200 OK in 527ms (Views: 150.4ms | ActiveRecord: 339.8ms | Allocations: 8392)
 
 
-  
-ActiveRecord::RecordNotFound (Couldn't find User with 'id'=7):
-  
-app/controllers/users_controller.rb:3:in `show'
-Started GET "/users/3" for 127.0.0.1 at 2023-07-28 12:52:12 +0200
-Processing by UsersController#show as HTML
-  Parameters: {"id"=>"3"}
-  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
-  ↳ app/controllers/users_controller.rb:3:in `show'
-Completed 404 Not Found in 6ms (ActiveRecord: 0.4ms | Allocations: 943)
-
-
-  
-ActiveRecord::RecordNotFound (Couldn't find User with 'id'=3):
-  
-app/controllers/users_controller.rb:3:in `show'
-Started GET "/users/2" for 127.0.0.1 at 2023-07-28 12:52:18 +0200
 Processing by UsersController#show as HTML
   Parameters: {"id"=>"2"}
-  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
-  ↳ app/controllers/users_controller.rb:3:in `show'
-  Rendering users/show.html.erb
-  Rendered users/show.html.erb (Duration: 0.1ms | Allocations: 7)
-Completed 200 OK in 10ms (Views: 1.8ms | ActiveRecord: 0.9ms | Allocations: 865)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mPost Load (28.6ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = $1 ORDER BY "posts"."created_at" DESC LIMIT $2[0m  [["author_id", 2], ["LIMIT", 3]]
+  ↳ app/views/users/show.html.erb:18
+  Rendered users/show.html.erb within layouts/application (Duration: 70.0ms | Allocations: 3937)
+  Rendered layout layouts/application.html.erb (Duration: 87.2ms | Allocations: 6777)
+Completed 200 OK in 467ms (Views: 59.8ms | ActiveRecord: 378.6ms | Allocations: 12685)
 
 
-Started GET "/" for 127.0.0.1 at 2023-07-28 12:52:31 +0200
-Processing by PagesController#home as HTML
-  Rendering pages/home.html.erb
-  Rendered pages/home.html.erb (Duration: 0.1ms | Allocations: 17)
-Completed 200 OK in 7ms (Views: 2.8ms | ActiveRecord: 0.0ms | Allocations: 728)
+Started GET "/1" for 127.0.0.1 at 2023-07-29 10:06:00 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/1"):
+  
+Started GET "/users" for 127.0.0.1 at 2023-07-29 10:06:14 +0200
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:4
+  Rendered users/index.html.erb within layouts/application (Duration: 4.0ms | Allocations: 973)
+  Rendered layout layouts/application.html.erb (Duration: 22.7ms | Allocations: 3708)
+Completed 200 OK in 30ms (Views: 26.6ms | ActiveRecord: 0.5ms | Allocations: 4036)
 
 
-Started GET "/users/1" for 127.0.0.1 at 2023-07-28 12:52:43 +0200
+Started GET "/users/8" for 127.0.0.1 at 2023-07-29 10:08:04 +0200
 Processing by UsersController#show as HTML
-  Parameters: {"id"=>"1"}
-  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
-  ↳ app/controllers/users_controller.rb:3:in `show'
-  Rendering users/show.html.erb
-  Rendered users/show.html.erb (Duration: 0.0ms | Allocations: 7)
-Completed 200 OK in 9ms (Views: 1.7ms | ActiveRecord: 0.3ms | Allocations: 938)
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mPost Load (64.0ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = $1 ORDER BY "posts"."created_at" DESC LIMIT $2[0m  [["author_id", 8], ["LIMIT", 3]]
+  ↳ app/views/users/show.html.erb:18
+  Rendered users/show.html.erb within layouts/application (Duration: 79.0ms | Allocations: 2662)
+  Rendered layout layouts/application.html.erb (Duration: 97.8ms | Allocations: 5182)
+Completed 200 OK in 106ms (Views: 31.3ms | ActiveRecord: 68.5ms | Allocations: 6001)
 
 
-Started GET "/users/1/posts" for 127.0.0.1 at 2023-07-28 12:52:50 +0200
+Started GET "/users/8/posts/" for 127.0.0.1 at 2023-07-29 10:08:15 +0200
 Processing by PostsController#index as HTML
-  Parameters: {"user_id"=>"1"}
-  Rendering posts/index.html.erb
-  Rendered posts/index.html.erb (Duration: 1.1ms | Allocations: 124)
-Completed 200 OK in 13ms (Views: 9.1ms | ActiveRecord: 0.0ms | Allocations: 894)
+  Parameters: {"user_id"=>"8"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:4:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."author_id" = $1[0m  [["author_id", 8]]
+  ↳ app/views/posts/index.html.erb:14
+  [1m[36mComment Load (183.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1 ORDER BY "comments"."created_at" DESC LIMIT $2[0m  [["post_id", 20], ["LIMIT", 5]]
+  ↳ app/views/posts/index.html.erb:28
+  [1m[36mComment Load (0.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1 ORDER BY "comments"."created_at" DESC LIMIT $2[0m  [["post_id", 21], ["LIMIT", 5]]
+  ↳ app/views/posts/index.html.erb:28
+  [1m[36mComment Load (0.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1 ORDER BY "comments"."created_at" DESC LIMIT $2[0m  [["post_id", 22], ["LIMIT", 5]]
+  ↳ app/views/posts/index.html.erb:28
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1 ORDER BY "comments"."created_at" DESC LIMIT $2[0m  [["post_id", 23], ["LIMIT", 5]]
+  ↳ app/views/posts/index.html.erb:28
+  [1m[36mComment Load (0.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1 ORDER BY "comments"."created_at" DESC LIMIT $2[0m  [["post_id", 24], ["LIMIT", 5]]
+  ↳ app/views/posts/index.html.erb:28
+  [1m[36mComment Load (0.5ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1 ORDER BY "comments"."created_at" DESC LIMIT $2[0m  [["post_id", 25], ["LIMIT", 5]]
+  ↳ app/views/posts/index.html.erb:28
+  Rendered posts/index.html.erb within layouts/application (Duration: 240.3ms | Allocations: 9328)
+  Rendered layout layouts/application.html.erb (Duration: 255.6ms | Allocations: 12138)
+Completed 200 OK in 273ms (Views: 75.8ms | ActiveRecord: 189.2ms | Allocations: 13569)
 
 
-Started GET "/users/1/posts/3" for 127.0.0.1 at 2023-07-28 12:53:01 +0200
-Processing by PostsController#show as HTML
-  Parameters: {"user_id"=>"1", "id"=>"3"}
-  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
-  ↳ app/controllers/posts_controller.rb:3:in `show'
-  [1m[36mPost Load (59.8ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
-  ↳ app/controllers/posts_controller.rb:4:in `show'
-  Rendering posts/show.html.erb
-  Rendered posts/show.html.erb (Duration: 1.1ms | Allocations: 118)
-Completed 200 OK in 155ms (Views: 2.7ms | ActiveRecord: 64.1ms | Allocations: 8669)
-
-
-Started GET "/" for 127.0.0.1 at 2023-07-28 16:02:01 +0200
-Processing by PagesController#home as HTML
-  Rendering pages/home.html.erb
-  Rendered pages/home.html.erb (Duration: 16.9ms | Allocations: 17)
-Completed 200 OK in 64ms (Views: 21.4ms | Allocations: 724)
-
-
-Started GET "/post" for 127.0.0.1 at 2023-07-28 16:02:24 +0200
-  
-ActionController::RoutingError (No route matches [GET] "/post"):
-  
-Started GET "/" for 127.0.0.1 at 2023-07-28 16:02:37 +0200
-Processing by PagesController#home as HTML
-  Rendering pages/home.html.erb
-  Rendered pages/home.html.erb (Duration: 0.7ms | Allocations: 8)
-Completed 200 OK in 6ms (Views: 2.4ms | Allocations: 345)
-
-
-Started GET "/users" for 127.0.0.1 at 2023-07-28 16:02:44 +0200
+Started GET "/" for 127.0.0.1 at 2023-07-29 10:28:31 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
 Processing by UsersController#index as HTML
-  Rendering users/index.html.erb
-  Rendered users/index.html.erb (Duration: 0.1ms | Allocations: 15)
-Completed 200 OK in 7ms (Views: 2.9ms | Allocations: 704)
-
-
-Started GET "/users/1" for 127.0.0.1 at 2023-07-28 16:02:52 +0200
-Processing by UsersController#show as HTML
-  Parameters: {"id"=>"1"}
-  [1m[36mUser Load (40.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
-  ↳ app/controllers/users_controller.rb:3:in `show'
-  Rendering users/show.html.erb
-  Rendered users/show.html.erb (Duration: 0.1ms | Allocations: 10)
-Completed 200 OK in 1902ms (Views: 1.7ms | ActiveRecord: 403.4ms | Allocations: 14563)
-
-
-Started GET "/users/1/posts" for 127.0.0.1 at 2023-07-28 16:04:45 +0200
-Processing by PostsController#index as HTML
-  Parameters: {"user_id"=>"1"}
-  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
-  ↳ app/controllers/posts_controller.rb:3:in `index'
-  Rendering posts/index.html.erb
-  Rendered posts/index.html.erb (Duration: 0.1ms | Allocations: 15)
-Completed 200 OK in 579ms (Views: 3.4ms | ActiveRecord: 0.7ms | Allocations: 4340)
-
-
-Started GET "/users/1/posts/1" for 127.0.0.1 at 2023-07-28 16:05:03 +0200
-Processing by PostsController#show as HTML
-  Parameters: {"user_id"=>"1", "id"=>"1"}
-  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
-  ↳ app/controllers/posts_controller.rb:8:in `show'
-  [1m[36mPost Load (22.4ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
-  ↳ app/controllers/posts_controller.rb:9:in `show'
-  Rendering posts/show.html.erb
-  Rendered posts/show.html.erb (Duration: 0.1ms | Allocations: 8)
-Completed 200 OK in 41ms (Views: 1.5ms | ActiveRecord: 22.8ms | Allocations: 3897)
-
-
-Started GET "/users" for 127.0.0.1 at 2023-07-28 16:22:53 +0200
-  [1m[36mActiveRecord::SchemaMigration Pluck (22.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
-Processing by UsersController#index as HTML
-Completed 404 Not Found in 293ms (ActiveRecord: 249.1ms | Allocations: 5194)
-
-
-  
-ActiveRecord::RecordNotFound (Couldn't find User without an ID):
-  
-app/controllers/users_controller.rb:3:in `index'
-Started GET "/users" for 127.0.0.1 at 2023-07-28 16:30:39 +0200
-Processing by UsersController#index as HTML
-  Rendering users/index.html.erb
-  Rendered users/index.html.erb (Duration: 1.4ms | Allocations: 130)
-Completed 200 OK in 26ms (Views: 20.9ms | Allocations: 1401)
-
-
-Started GET "/users/1" for 127.0.0.1 at 2023-07-28 16:30:53 +0200
-Processing by UsersController#show as HTML
-  Parameters: {"id"=>"1"}
-  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
-  ↳ app/controllers/users_controller.rb:6:in `show'
-  Rendering users/show.html.erb
-  Rendered users/show.html.erb (Duration: 1.2ms | Allocations: 123)
-Completed 200 OK in 181ms (Views: 2.6ms | ActiveRecord: 25.5ms | Allocations: 12688)
-
-
-Started GET "/users/1/posts" for 127.0.0.1 at 2023-07-28 16:31:31 +0200
-Processing by PostsController#index as HTML
-  Parameters: {"user_id"=>"1"}
-  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
-  ↳ app/controllers/posts_controller.rb:3:in `index'
-  Rendering posts/index.html.erb
-  Rendered posts/index.html.erb (Duration: 1.2ms | Allocations: 125)
-Completed 200 OK in 62ms (Views: 11.7ms | ActiveRecord: 0.5ms | Allocations: 4950)
-
-
-Started GET "/users" for 127.0.0.1 at 2023-07-28 16:31:36 +0200
-Processing by UsersController#index as HTML
-  Rendering users/index.html.erb
-  Rendered users/index.html.erb (Duration: 0.1ms | Allocations: 8)
-Completed 200 OK in 5ms (Views: 1.3ms | ActiveRecord: 0.0ms | Allocations: 353)
-
-
-Started GET "/users" for 127.0.0.1 at 2023-07-28 16:34:30 +0200
-Processing by UsersController#index as HTML
-  Rendering users/index.html.erb
-  Rendered users/index.html.erb (Duration: 0.1ms | Allocations: 15)
-Completed 200 OK in 19ms (Views: 3.1ms | ActiveRecord: 0.0ms | Allocations: 2683)
-
-
-Started GET "/users" for 127.0.0.1 at 2023-07-28 16:34:36 +0200
-Processing by UsersController#index as HTML
-  Rendering users/index.html.erb
-  Rendered users/index.html.erb (Duration: 0.1ms | Allocations: 7)
-Completed 200 OK in 32ms (Views: 24.0ms | ActiveRecord: 0.0ms | Allocations: 361)
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:4
+  Rendered users/index.html.erb within layouts/application (Duration: 75.1ms | Allocations: 6533)
+  Rendered layout layouts/application.html.erb (Duration: 3145.3ms | Allocations: 32671)
+Completed 200 OK in 3360ms (Views: 3162.5ms | ActiveRecord: 11.4ms | Allocations: 39202)
 
 
 Started GET "/" for 127.0.0.1 at 2023-07-29 11:41:19 +0200
