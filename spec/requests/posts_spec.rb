@@ -1,5 +1,4 @@
 require 'rails_helper'
-
 RSpec.describe 'Posts', type: :request do
   let!(:user) do
     User.create(name: 'Anything',
