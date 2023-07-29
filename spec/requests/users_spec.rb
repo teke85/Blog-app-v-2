@@ -1,27 +1,29 @@
 require 'rails_helper'
-require 'rails-controller-testing'
-
 RSpec.describe 'Users', type: :request do
   context 'GET /index' do
-    it 'renders a successful response' do
-      get users_url
-      expect(response).to be_successful
+    it 'renders the correct template' do
+      get users_path
+      expect(response).to render_template('index')
+    end
+  end
+
+  describe 'User GET /show' do
+    # Create a user before the test
+    let!(:user) { User.create(name: 'John Doe') }
+
+    it 'returns success for detail user' do
+      get "/users/#{user.id}"
+      expect(response).to have_http_status(200)
     end
 
-    it 'renders the correct template' do
-      get users_url
-      expect(response).to render_template('index')
+    it 'user responsed body with correct place holder' do
+      get '/users/'
+      expect(response.body).to include('<h1>All users page placeholder</h1>')
     end
 
     it 'includes correct placeholder text' do
-      get users_url
-      expect(response.body).to include('<h1>Here is a list of users</h1>')
-    end
-  end
-  context 'GET /show' do
-    it 'renders a successful response' do
-      get users_url(1)
-      expect(response).to be_successful
+      get users_path
+      expect(response.body).to include('<h1>All users page placeholder</h1>')
     end
   end
 end

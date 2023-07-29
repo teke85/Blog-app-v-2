@@ -243,6 +243,7 @@ DEPENDENCIES
   rails (~> 7.0.4, >= 7.0.4.3)
   rails-controller-testing
   rspec-rails (= 6.0.1)
+
   selenium-webdriver
   sprockets-rails
   stimulus-rails
