@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = @current_user.posts.new
+    @post = Post.new  # Initialize a new post without associating it with the current user
   end
 
   def create
