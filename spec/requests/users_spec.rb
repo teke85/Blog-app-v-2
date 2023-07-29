@@ -8,9 +8,9 @@ RSpec.describe 'Users', type: :request do
     end
   end
 
-  describe "User GET /show" do
+  describe 'User GET /show' do
     # Create a user before the test
-    let!(:user) { User.create(name: "John Doe") }
+    let!(:user) { User.create(name: 'John Doe') }
 
     it 'returns success for detail user' do
       get "/users/#{user.id}"
