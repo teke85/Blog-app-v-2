@@ -1,42 +1,30 @@
-<main>
-    <div class="single-user container">
-        <section class="test">
-            <img src=<%= @user.photo %> alt="User Photo" class="user-photo">
-            <div class="right-col">
-                <h2 class="user-name"><%= @user.name%></h2>
-                <h4 class="post-count">Number of posts: <%= @user.posts_counter %> </h4>
-            </div>
-        </section>
-        <hr>
-        
-        <section class="posts container">
-            <h3>All Posts from <%= @user.name %></h3>
-            <% @user.posts.each do |post| %>
-            
-            <a href="/users/<%=@user.id%>/posts/<%=post.id%>" class="post-link">
-                <div class="post">
-                    <div class="post-content">
-                        <h4><%= post.title %></h4>
-                        <p><%= truncate(post.text, length: 200) %></p>
-                    </div>
-                    <footer class="post-footer">
-                    <span class="comment-count">Comments: <%= post.comments_counter %></span>, <span class="like-count">Likes: <%= post.likes_counter %></span>
-                    </footer>
-                    </div>
-                    <div class="comments">
-                    <h5>Comments</h5>
-                    <% post.recent_comments.each do |comment| %>
-                        <div  id="single-comment"> 
-                            <span> <%= comment.author.name %> : <%= comment.text %></span>
-                        </div>
-                    <% end %>
-                </div>
-                </a>
-                
-            
-            <% end %>
-            
-        </section>
+<main class="posts-page">
+  <div class="row">
+   <%= render partial: "shared/user_card", locals: {u: @user}%>
+
+    <div class="post-cards-wrapper">   
+     <%@posts.each do |p|%>
+      <div class="card-wrapper">
+        <%= render partial: "shared/post_card", locals: {p:p}%>
+        <div class="comments-wrapper">
+        <% if !p.five_most_recent_comments.empty?%>
+          <%= render partial: "shared/comments", locals: {comments: p.five_most_recent_comments}%>
+        <%else%>
+           <div class="empty-comments">
+          <p>There are no comments yet</p>
+           </div>
+       <%end%>
+        </div>
+      </div>
+     <%end%>
     </div>
+   
+  </div>
+
+  <div class="row">
+     <button class="btn">
+        <%= link_to "Create new post", new_user_post_path %>
+     </button>
+  </div>
 
 </main>

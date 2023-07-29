@@ -1,0 +1,18 @@
+body {
+  background-color: rgb(219, 210, 210);
+}
+
+img {
+  width: 15%;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-around;
+  text-decoration: none;
+}
+
+.nav-link {
+  list-style: none;
+  text-decoration: none;
+}
