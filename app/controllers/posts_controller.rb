@@ -2,19 +2,16 @@
 class PostsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
-    @posts = @user.posts # Initialize the @posts variable with the posts associated with the user
-    # Add logging for debugging
-    Rails.logger.info("User: #{@user}")
-    Rails.logger.info("Posts: #{@posts}")
+    @posts = @user.posts.includes(:comments) # Eager load comments for each post
   end
 
   def show
     @post = Post.find(params[:id])
-    @comments = @post.five_most_recent_comments
+    @comments = @post.comments.order(created_at: :desc).limit(5) # Fetch 5 most recent comments
   end
 
   def new
-    @post = Post.new # Initialize a new post without associating it with the current user
+    @post = Post.new
   end
 
   def create
