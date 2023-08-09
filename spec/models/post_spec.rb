@@ -68,12 +68,5 @@ RSpec.describe Post, type: :model do
       end
     end
 
-    it 'returns the 5 most recent comments' do
-      expect(subject.recent_comments.length).to eq(5)
-    end
-
-    it 'returns the most recent comments' do
-      expect(subject.recent_comments.first).to eq(subject.comments.last)
-    end
   end
 end

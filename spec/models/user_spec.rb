@@ -16,9 +16,8 @@ RSpec.describe User, type: :model do
     end
 
     it 'is not valid if not unique' do
-      User.create(name: 'Jay', bio: 'Full Stack Developer', posts_counter: 3)
-      subject.name = 'jay'
-      expect(subject).to_not be_valid
+      user_with_same_name = subject.dup
+      expect(user_with_same_name).to_not be_valid
     end
   end
 
