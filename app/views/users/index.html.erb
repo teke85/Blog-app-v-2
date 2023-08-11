@@ -1,11 +1,9 @@
-<main class="home">
-<div class="users-list-wrapper row">
-<h1 class="heading">Users list page</h1>
-<% @users.each do |u|%>
- <%= render partial: "shared/user_card", locals: {u:u}%>
+<h1>Blog Applicaton</h1>
+
+<ul>
+<% @users.each do |user|%>
+<li>
+  <%= render 'partials/user', user: user%>
+</li>
 <% end %>
-<div class="create-new-btn-wrapper">
-<%= link_to "Create new post", new_user_post_path(@current_user)%>
-</div>
-</div>
-</main>
+</ul>

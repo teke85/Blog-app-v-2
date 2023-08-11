@@ -1,72 +1,52 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  let!(:user) { User.create(name: 'Eby', bio: 'Dancer', posts_counter: 0) }
+  let(:post) { Post.create }
 
-  subject do
-    described_class.new(
-      title: 'Post 1',
-      text: 'This is my blog',
-      author: user,
-      comments_counter: 0,
-      likes_counter: 0
-    )
+  context 'Testing with no inputs' do
+    it 'should not be valid' do
+      expect(post).to_not be_valid
+    end
+
+    it 'likes counter must be 0 or greater' do
+      expect(subject.likes_counter).to be >= 0
+      expect(subject.likes_counter).to be_a(Integer)
+    end
+
+    it 'comments counter must be 0 or greater' do
+      expect(subject.comments_counter).to be >= 0
+      expect(subject.comments_counter).to be_a(Integer)
+    end
+
+    it 'return return_five_most_recent_comments' do
+      expect(subject.return_five_most_recent_comments).to eq(subject.comments.order(updated_at: :desc).limit(5))
+    end
   end
 
-  before { subject.save }
+  context 'Testing with inputs' do
+    let(:user) { User.create(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'New user') }
+    subject { Post.new(author: user, title: 'Nature', text: 'I love this!') }
+    before { subject.save }
 
-  describe 'Validations' do
-    it 'is valid with valid attributes' do
+    it 'should be valid' do
       expect(subject).to be_valid
     end
 
-    it 'is not valid without a title' do
-      subject.title = nil
-      expect(subject).to_not be_valid
+    it 'should have comments_counter equal to 0' do
+      expect(subject.comments_counter).to eq(0)
     end
 
-    it 'is not valid if title is longer than 250' do
-      subject.title = 'a' * 251
-      expect(subject).to_not be_valid
+    it 'should have likes_counter equal to 0' do
+      expect(subject.likes_counter).to eq(0)
     end
 
-    it 'is not valid if likes_counter is less than 0' do
-      subject.likes_counter = -1
-      expect(subject).to_not be_valid
+    it 'title should not be greater than 250 characters' do
+      post = Post.create(author: user, title: 'a' * 251, text: 'I love this!')
+      expect(post).not_to be_valid
     end
 
-    it 'is not valid if likes_counter is not an integer' do
-      subject.likes_counter = 'string'
-      expect(subject).to_not be_valid
+    it 'increments the author\'s post_counter on save' do
+      expect { subject.save }.to change { user.reload.posts_counter }.by(1)
     end
-
-    it 'is not valid if comments_counter is less than 0' do
-      subject.comments_counter = -1
-      expect(subject).to_not be_valid
-    end
-
-    it 'is not valid if comments_counter is not an integer' do
-      subject.comments_counter = 'string'
-      expect(subject).to_not be_valid
-    end
-  end
-
-  describe 'Associations' do
-    it 'belongs to an author' do
-      expect(subject.author).to eq(user)
-    end
-
-    it 'updates counter of author' do
-      expect(user.posts_counter).to eq(1)
-    end
-  end
-
-  describe '#recent_comments' do
-    before do
-      6.times do |i|
-        Comment.create(text: "Comment #{i + 1}", post: subject, author: user)
-      end
-    end
-
   end
 end

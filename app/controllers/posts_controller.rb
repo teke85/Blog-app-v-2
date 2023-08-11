@@ -1,24 +1,25 @@
-# controller for handling posts
 class PostsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
-    @posts = @user.posts.includes(:comments) # Eager load comments for each post
+    @posts = Post.includes(comments: [:author]).where(author_id: params[:user_id])
   end
 
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments.order(created_at: :desc).limit(5) # Fetch 5 most recent comments
   end
 
   def new
+    @user = current_user
     @post = Post.new
   end
 
   def create
-    @post = @current_user.posts.new(post_params)
+    @user = current_user
+    @post = @user.posts.new(post_params)
     if @post.save
-      redirect_to user_posts_path(@current_user)
+      redirect_to user_post_path(@user, @post)
     else
+      flash.now[:errors] = 'Invalid post!'
       render :new
     end
   end

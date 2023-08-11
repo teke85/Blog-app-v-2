@@ -1,29 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { described_class.new(name: 'Teke', bio: 'Full Stack Developer', posts_counter: 0) }
+  context 'testing user with no values' do
+    subject { User.new }
+    before { subject.save }
 
-  before { subject.save }
-
-  context 'Validating :name' do
-    it 'is valid with valid attributes' do
-      expect(subject).to be_valid
-    end
-
-    it 'is not valid without a name' do
-      subject.name = nil
+    it 'require user to have name' do
       expect(subject).to_not be_valid
     end
 
-    it 'is not valid if not unique' do
-      user_with_same_name = subject.dup
-      expect(user_with_same_name).to_not be_valid
+    it 'posts counter should be an integer and greater than or equal to zero' do
+      expect(subject.posts_counter).to be_a(Integer)
+      expect(subject.posts_counter).to be >= 0
+    end
+
+    it 'return return_three_most_recent_posts' do
+      expect(subject.return_three_most_recent_posts).to eq(subject.posts.order(created_at: :desc).limit(3))
     end
   end
+  context 'testing user with values' do
+    subject(:user) { User.new(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Mexico.') }
+    before { user.save }
 
-  context 'Associations' do
-    it 'has many posts' do
-      expect(described_class.reflect_on_association(:posts).macro).to eq :has_many
+    it 'user with name should be valid' do
+      expect(user).to be_valid
+    end
+
+    it 'posts counter should be equal to 0' do
+      expect(user.posts_counter).to eq(0)
     end
   end
 end

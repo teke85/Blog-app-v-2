@@ -19,9 +19,7 @@ second_post = Post.create(author: second_user, title: 'Hello', text: 'This is my
 third_post = Post.create(author: first_user, title: 'Hello', text: 'This is my first post')
 fourth_post = Post.create(author: second_user, title: 'Hello', text: 'This is my first post')
 
+6.times do
 Comment.create(post: first_post, author: second_user, text: 'Hi Tom!')
 Comment.create(post: first_post, author: first_user, text: 'Hi Lilly!')
-Comment.create(post: second_post, author: second_user, text: 'Hi Tom!')
-Comment.create(post: second_post, author: first_user, text: 'Hi Lilly!')
-Comment.create(post: third_post, author: second_user, text: 'Hi Tom!')
-Comment.create(post: third_post, author: first_user, text: 'Hi Lilly!')
+end
