@@ -1,24 +1,16 @@
-<div class="single-post-page">
-  <div class="row">
-    <%= render partial: "shared/post_body",  locals: {post: @post}%>
-   <div class="comments-wrapper">
-      <% if !@comments&.empty?%>
-        <%= render partial: "shared/comments", locals: {comments: @comments}%>
-        <%else%>
-        <p>There are no comments yet</p>
-       <%end%>
+<h1>Blog App</h1>
 
-         <div class="comment_like_holder">
-            <div class= "comment_form_holder">
-            <h3>Leave a comment</h3>
-            <%= render 'comments/form', comment: @comment %>
-            </div>
-
-            <div class="like_form_holder">
-            <h3>Like this post</h3>
-            <%= render 'likes/form', like: @like %>
-            </div>
-        </div>
+<main class='user-cont2'>
+  <div class="post-in-show">
+    <div class="post-in-show2">
+      <h3><%= @post.title %> by <%= @post.author.name %></h3>
+      <p>Comments: <%= @post.comments_counter %>, Likes: <%= @post.likes_counter %></p>
     </div>
+    <p><%= @post.text %></p>
   </div>
-</div>
+  <div class="comment-container">
+    <% @post.comments.each do |comment| %>
+      <%= render 'partials/comment', comment: comment %>
+    <% end %>
+  </div>
+</main>

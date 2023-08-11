@@ -1,30 +1,24 @@
-<main class="posts-page">
-  <div class="row">
-   <%= render partial: "shared/user_card", locals: {u: @user}%>
+<h1>Blog App</h1>
 
-    <div class="post-cards-wrapper">   
-     <%@posts.each do |p|%>
-      <div class="card-wrapper">
-        <%= render partial: "shared/post_card", locals: {p:p}%>
-        <div class="comments-wrapper">
-        <% if !p.five_most_recent_comments.empty?%>
-          <%= render partial: "shared/comments", locals: {comments: p.five_most_recent_comments}%>
-        <%else%>
-           <div class="empty-comments">
-          <p>There are no comments yet</p>
-           </div>
-       <%end%>
-        </div>
+<%= render 'partials/user', user: @user %>
+<main class="post-index">
+  <% @posts.reverse_each do |post| %>
+    <div class="post-details">
+      <%= render 'partials/post', post: post %>
+
+      <div>
+        <%= link_to "Add Comment", new_user_post_comment_path(@user, post), class: 'add_comment' %>
+        <%= form_with url: user_post_likes_path(post.author.id, post.id) do |form| %>
+          <%= form.submit 'Like', class: 'like_btn' %>
+        <% end %>
       </div>
-     <%end%>
+
+      <div class="comment-container">
+        <% post.return_five_most_recent_comments.reverse_each do |comment| %>
+          <%= render 'partials/comment', comment: comment %>
+        <% end %>
+      </div>
     </div>
-   
-  </div>
-
-  <div class="row">
-     <button class="btn">
-        <%= link_to "Create new post", new_user_post_path %>
-     </button>
-  </div>
-
+  <% end %>
+  <div class='pagination'>Pagination</div>
 </main>
