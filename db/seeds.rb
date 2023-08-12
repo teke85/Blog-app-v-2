@@ -1,7 +1,3 @@
-# frozen_string_literal: true
-
-# seeds file
-
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
@@ -9,17 +5,41 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+# user_one = User.create(name: 'Mizpah', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam bibendum, urna ut semper porttitor, mi ex euismod arcu, a euismod magna tortor eu elit. Ut luctus neque eu nunc tincidunt, non tristique justo tempor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer posuere justo at erat vehicula, a ultrices ex facilisis. Donec at nunc venenatis, venenatis sapien quis, malesuada nulla. Maecenas ac convallis metus, quis feugiat risus. Aliquam nec sagittis risus. Quisque bibendum dolor eget volutpat luctus. Pellentesque mollis orci ut velit laoreet dictum.')
+# user_two = User.create(name: 'Michael', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Pellentesque eget risus in libero elementum tristique ac non tortor. Duis eget urna eget dui ultrices dapibus. Praesent in cursus sapien. Pellentesque pellentesque, nisl ut fermentum consectetur, neque turpis varius odio, vel tristique justo nulla eget justo. Aliquam finibus venenatis tristique. Curabitur at urna nec est convallis auctor. Nunc eu felis eu enim blandit euismod. Suspendisse ultricies quam id ipsum aliquam congue. Sed vel est ac risus congue aliquam nec vel lorem. Integer mattis, purus a fermentum consequat, massa quam blandit magna, et pharetra nibh nulla nec mauris. Donec eget quam et eros vehicula sollicitudin. ')
 
-first_user = User.create(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Mexico.')
-second_user = User.create(name: 'Lilly', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Poland.')
+# post_two = Post.create(author: user_two, title: 'Lorem Ipsum', text: 'Nam at justo hendrerit, vehicula metus non, facilisis dui. Aenean vitae metus ligula. Cras dignissim congue ligula, non bibendum nisi scelerisque nec. Aliquam erat volutpat. Fusce euismod ex vitae augue luctus, nec accumsan nisi consequat. Ut sit amet urna aliquam, volutpat mi nec, varius libero. Fusce eu lorem ut enim maximus tincidunt. Cras consequat, sapien ac sollicitudin posuere, felis nulla sollicitudin ipsum, sit amet feugiat elit felis et massa. Suspendisse tristique nulla id diam dictum hendrerit. Vivamus scelerisque ipsum vitae purus euismod venenatis. Aenean sodales a dui ut viverra. Nullam malesuada velit non libero mattis feugiat. Nullam dapibus purus nec nisi volutpat, nec facilisis purus congue. Etiam vel quam vel odio pharetra feugiat at eu purus. Phasellus maximus elit vel ligula dictum, vitae suscipit velit bibendum.
 
+# Sed in elementum libero. Maecenas eleifend justo eget mauris ultricies, in posuere orci bibendum. Cras vel justo metus. Vivamus non fringilla erat. Nullam auctor sit amet neque sit amet auctor. Vivamus eget nisl a massa viverra convallis ac quis libero. Curabitur hendrerit, velit eget efficitur fermentum, mi eros interdum nisl, ut lacinia urna ipsum in lectus. Integer sollicitudin, lectus eget convallis finibus, elit risus blandit tellus, eget euismod turpis velit ac nibh. Integer scelerisque dui nec justo auctor, et egestas est scelerisque. Aenean in dolor at arcu venenatis finibus.
 
-first_post = Post.create(author: first_user, title: 'Hello', text: 'This is my first post')
-second_post = Post.create(author: second_user, title: 'Hello', text: 'This is my first post')
-third_post = Post.create(author: first_user, title: 'Hello', text: 'This is my first post')
-fourth_post = Post.create(author: second_user, title: 'Hello', text: 'This is my first post')
+# Sed tincidunt, arcu vel sollicitudin semper, purus nunc bibendum neque, vel consectetur nisi elit et libero. Sed mollis egestas turpis, eu varius orci fermentum eget. Aliquam quis arcu at nisi venenatis feugiat. Sed in lectus ac lectus scelerisque malesuada. Vivamus semper')
+
+# post_one = Post.create(author: user_one, title: 'Lorem Ipsum', text: 'Nam at justo hendrerit, vehicula metus non, facilisis dui. Aenean vitae metus ligula. Cras dignissim congue ligula, non bibendum nisi scelerisque nec. Aliquam erat volutpat. Fusce euismod ex vitae augue luctus, nec accumsan nisi consequat. Ut sit amet urna aliquam, volutpat mi nec, varius libero. Fusce eu lorem ut enim maximus tincidunt. Cras consequat, sapien ac sollicitudin posuere, felis nulla sollicitudin ipsum, sit amet feugiat elit felis et massa. Suspendisse tristique nulla id diam dictum hendrerit. Vivamus scelerisque ipsum vitae purus euismod venenatis. Aenean sodales a dui ut viverra. Nullam malesuada velit non libero mattis feugiat. Nullam dapibus purus nec nisi volutpat, nec facilisis purus congue. Etiam vel quam vel odio pharetra feugiat at eu purus. Phasellus maximus elit vel ligula dictum, vitae suscipit velit bibendum.
+
+# Sed in elementum libero. Maecenas eleifend justo eget mauris ultricies, in posuere orci bibendum. Cras vel justo metus. Vivamus non fringilla erat. Nullam auctor sit amet neque sit amet auctor. Vivamus eget nisl a massa viverra convallis ac quis libero. Curabitur hendrerit, velit eget efficitur fermentum, mi eros interdum nisl, ut lacinia urna ipsum in lectus. Integer sollicitudin, lectus eget convallis finibus, elit risus blandit tellus, eget euismod turpis velit ac nibh. Integer scelerisque dui nec justo auctor, et egestas est scelerisque. Aenean in dolor at arcu venenatis finibus.
+
+# Sed tincidunt, arcu vel sollicitudin semper, purus nunc bibendum neque, vel consectetur nisi elit et libero. Sed mollis egestas turpis, eu varius orci fermentum eget. Aliquam quis arcu at nisi venenatis feugiat. Sed in lectus ac lectus scelerisque malesuada. Vivamus semper')
+
+first_user = User.create(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Mexico.', email: 'tomsmith12@gmail.com')
+second_user = User.create(name: 'Lilly', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Poland.', email: 'lillyspecter@gmail.com')
+
+4.times do
+post_one = Post.create(author: first_user, title: 'Lorem Ipsum', text: 'Nam at justo hendrerit, vehicula metus non, facilisis dui. Aenean vitae metus ligula. Cras dignissim congue ligula, non bibendum nisi scelerisque nec. Aliquam erat volutpat. Fusce euismod ex vitae augue luctus, nec accumsan nisi consequat. Ut sit amet urna aliquam, volutpat mi nec, varius libero. Fusce eu lorem ut enim maximus tincidunt. Cras consequat, sapien ac sollicitudin posuere, felis nulla sollicitudin ipsum, sit amet feugiat elit felis et massa. Suspendisse tristique nulla id diam dictum hendrerit. Vivamus scelerisque ipsum vitae purus euismod venenatis. Aenean sodales a dui ut viverra. Nullam malesuada velit non libero mattis feugiat. Nullam dapibus purus nec nisi volutpat, nec facilisis purus congue. Etiam vel quam vel odio pharetra feugiat at eu purus. Phasellus maximus elit vel ligula dictum, vitae suscipit velit bibendum.
+
+Sed in elementum libero. Maecenas eleifend justo eget mauris ultricies, in posuere orci bibendum. Cras vel justo metus. Vivamus non fringilla erat. Nullam auctor sit amet neque sit amet auctor. Vivamus eget nisl a massa viverra convallis ac quis libero. Curabitur hendrerit, velit eget efficitur fermentum, mi eros interdum nisl, ut lacinia urna ipsum in lectus. Integer sollicitudin, lectus eget convallis finibus, elit risus blandit tellus, eget euismod turpis velit ac nibh. Integer scelerisque dui nec justo auctor, et egestas est scelerisque. Aenean in dolor at arcu venenatis finibus.
+
+Sed tincidunt, arcu vel sollicitudin semper, purus nunc bibendum neque, vel consectetur nisi elit et libero. Sed mollis egestas turpis, eu varius orci fermentum eget. Aliquam quis arcu at nisi venenatis feugiat. Sed in lectus ac lectus scelerisque malesuada. Vivamus semper')
+end
+
+4.times do
+post_two = Post.create(author: second_user, title: 'Lorem Ipsum', text: 'Nam at justo hendrerit, vehicula metus non, facilisis dui. Aenean vitae metus ligula. Cras dignissim congue ligula, non bibendum nisi scelerisque nec. Aliquam erat volutpat. Fusce euismod ex vitae augue luctus, nec accumsan nisi consequat. Ut sit amet urna aliquam, volutpat mi nec, varius libero. Fusce eu lorem ut enim maximus tincidunt. Cras consequat, sapien ac sollicitudin posuere, felis nulla sollicitudin ipsum, sit amet feugiat elit felis et massa. Suspendisse tristique nulla id diam dictum hendrerit. Vivamus scelerisque ipsum vitae purus euismod venenatis. Aenean sodales a dui ut viverra. Nullam malesuada velit non libero mattis feugiat. Nullam dapibus purus nec nisi volutpat, nec facilisis purus congue. Etiam vel quam vel odio pharetra feugiat at eu purus. Phasellus maximus elit vel ligula dictum, vitae suscipit velit bibendum.
+	
+Sed in elementum libero. Maecenas eleifend justo eget mauris ultricies, in posuere orci bibendum. Cras vel justo metus. Vivamus non fringilla erat. Nullam auctor sit amet neque sit amet auctor. Vivamus eget nisl a massa viverra convallis ac quis libero. Curabitur hendrerit, velit eget efficitur fermentum, mi eros interdum nisl, ut lacinia urna ipsum in lectus. Integer sollicitudin, lectus eget convallis finibus, elit risus blandit tellus, eget euismod turpis velit ac nibh. Integer scelerisque dui nec justo auctor, et egestas est scelerisque. Aenean in dolor at arcu venenatis finibus.
+	
+Sed tincidunt, arcu vel sollicitudin semper, purus nunc bibendum neque, vel consectetur nisi elit et libero. Sed mollis egestas turpis, eu varius orci fermentum eget. Aliquam quis arcu at nisi venenatis feugiat. Sed in lectus ac lectus scelerisque malesuada. Vivamus semper')
+end
 
 6.times do
-Comment.create(post: first_post, author: second_user, text: 'Hi Tom!')
-Comment.create(post: first_post, author: first_user, text: 'Hi Lilly!')
+Comment.create(post: post_one, author: first_user, text: 'cuowevg owvwuei huiobqugog ey cfgiugey efuuioqcnfu qrb ryqfo	hpefurfyrfqergiuoheqrigniqer ur uyeqrif erfeqrf erheuirqe qeiuqelqjervbqjer vqer!' )
+Comment.create(post: post_two, author: second_user, text: 'cuowevg owvwuei huiobqugog ey cfgiugey efuuioqcnfu qrb ryqfo	hpefurfyrfqergiuoheqrigniqer ur uyeqrif erfeqrf erheuirqe qeiuqelqjervbqjer vqer!' )
 end
