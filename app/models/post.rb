@@ -21,6 +21,10 @@ class Post < ApplicationRecord
     author.increment!(:posts_counter)
   end
 
+  def reduce_posts_counter
+    author.decrement!(:posts_counter)
+  end
+
   def set_defaults
     self.likes_counter ||= 0
     self.comments_counter ||= 0
